@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import GameQuestion from './components/GameQuestion';
-import GameComponent from './components/GameComponent';
-import GameBoard  from './components/GameBoard';
 
+import Header from './components/Header';
+import Main from './components/Main'
 
 class App extends Component {
 
   state = {
     initialUsers: [],
-    value: ""
+    value: "",
+    currentUser: "",
+    isNewUser: true,
+    parentEmail: "",
+    initialQuestions: [],
+    numberCorrect: 0,
+    numberWrong: 0,
+    totalQuestions: 0
   }
 
   // retrieve known user names from the database
@@ -26,20 +32,37 @@ class App extends Component {
   
 });
 
+// fetch game questions from the database
+
+fetchGameQuestions = new Promise((resolve, reject) => {
+  console.log('Fetching questions from the database');
+  fetch(`${process.env.REACT_APP_BASEURL}/questions`)
+  .then((response) => response.json())
+  .then((jData) => {
+      resolve(jData);
+  })
+});
+
 // make sure we wait for the fetch to complete before attempting to 
 // put the values into state.
 
 componentDidMount = async () => {
     let userList = await this.fetchUserNames;
+    let questionList = await this.fetchGameQuestions;
 
     this.setState({
-      initialUsers: userList
+      initialUsers: userList,
+      initialQuestions: questionList
     })
 
-    console.log("Users", userList);
+    console.log("Loaded Users", userList);
+    console.log("Loaded Questions", questionList)
 }
 
 handleChange = (event) => {
+
+  console.log('Form Change detected')
+  console.log(`event = ${event.target.value}`)
   this.setState({
       value: event.target.value
   })
@@ -55,31 +78,81 @@ handleSubmit = (event) => {
   let foundUser = this.state.initialUsers.find(user => user.name === userInput);
   console.log(`Found user ${foundUser}`)
 
+  // the values here determine the conditional rendering that happens next.
   if (foundUser != null) {
-      console.log("Welcome this user back to the game.")
+      console.log("Welcome this user back to the game.");
+      this.setState({
+        currentUser: foundUser,
+        isNewUser: false
+      })
   } else {
+    // the user is new to us.
+    // display the rules
+    // display a button asking if they want to play.
       console.log("display the rules")
   }
 
 };
 
+
+// our child component captures parent email address.
+// this method enables the component to push that value back up to App.js
+
+handleAddParentEmail = (event) => {
+  console.log('Capturing Parent Email Address');
+  event.preventDefault();
+  console.log("Current Event", event.target.value);
+  this.setState({
+    parentEmail: event.target.value
+  })
+
+  console.log('Current state', this.state.parentEmail);
+}
+
+
+/**
+ * This method captures when player answers questions 
+ * Used to capture the state of the game.
+ */
+
+updateGameState = (questionId, answeredCorrectly) => {
+  console.log('Congrats! You are updating the game status');
+  console.log(`user answered ${questionId} and their answer was ${answeredCorrectly}`);
+
+  let total = this.state.totalQuestions;
+  let correct = this.state.numberCorrect;
+  let wrong = this.state.numberWrong;
+
+  // increment the number correct or incorrect, depending upon if the answer was true or false.
+
+  if (answeredCorrectly) {
+
+   
+    this.setState({
+      numberCorrect: correct+=1,
+      totalQuestions: total+=1
+    })
+  } else {
+      this.setState({
+        totalQuestions: total+=1,
+        numberWrong: wrong+=1
+      })
+  }
+  
+}
+
   render() {
   return (
     <div className="App">
-      {/* We're going to solict user input here. */}
-
-      <form onSubmit={this.handleSubmit}>
-                 <label>
-                     Your name:
-                     <input type="text" value={this.state.value}  onChange={this.handleChange} />
-                 </label>
-                <input type="submit" value="Let's find your name!" />
-      </form>
-
-        <GameBoard 
-          userList={this.state.initialUsers}
-        />
-        <GameComponent />
+      <Header />
+      <Main 
+        userList={this.state.initialUsers}
+        questionList={this.state.initialQuestions}
+        updateGameState={this.updateGameState}
+        totalQuestions={this.state.totalQuestions}
+        numberCorrect={this.state.numberCorrect}
+        numberWrong={this.state.numberWrong}
+      />    
       
 
     </div>
