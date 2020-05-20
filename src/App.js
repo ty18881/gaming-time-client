@@ -16,7 +16,8 @@ class App extends Component {
     initialQuestions: [],
     numberCorrect: 0,
     numberWrong: 0,
-    totalQuestions: 0
+    totalQuestions: 0,
+    pointsEarned: 0
   }
 
   // retrieve known user names from the database
@@ -115,30 +116,37 @@ handleAddParentEmail = (event) => {
  * Used to capture the state of the game.
  */
 
-updateGameState = (questionId, answeredCorrectly) => {
+updateGameState = (question, answeredCorrectly) => {
   console.log('Congrats! You are updating the game status');
-  console.log(`user answered ${questionId} and their answer was ${answeredCorrectly}`);
+  console.log(`user answered ${question.id} and their answer was ${answeredCorrectly}`);
 
   let total = this.state.totalQuestions;
   let correct = this.state.numberCorrect;
   let wrong = this.state.numberWrong;
+  let pointTotal = this.state.pointsEarned + parseInt(question.point_value);
 
+  
   // increment the number correct or incorrect, depending upon if the answer was true or false.
 
   if (answeredCorrectly) {
+    console.log(`Correct Answer - updating totals in state.  Point Total = ${pointTotal}`)
 
-   
     this.setState({
       numberCorrect: correct+=1,
-      totalQuestions: total+=1
+      totalQuestions: total+=1,
+      pointsEarned: pointTotal
     })
+    console.log(`updating Game state point total = ${this.state.pointsEarned} by ${pointTotal} points`);
+    
   } else {
       this.setState({
         totalQuestions: total+=1,
-        numberWrong: wrong+=1
+        numberWrong: wrong+=1,
+        pointsEarned: this.state.pointsEarned
       })
   }
   
+ 
 }
 
   render() {
@@ -152,6 +160,7 @@ updateGameState = (questionId, answeredCorrectly) => {
         totalQuestions={this.state.totalQuestions}
         numberCorrect={this.state.numberCorrect}
         numberWrong={this.state.numberWrong}
+        pointsEarned={this.state.pointsEarned}
       />    
       
 

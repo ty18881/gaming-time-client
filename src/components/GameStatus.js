@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 
 /**
  * this component holds status of the current game
@@ -11,6 +11,8 @@ import React, { Component } from 'react';
 
     render() {
         const { totalQuestions, numberCorrect, numberWrong } = this.props;
+        
+
         return(
             <>
 
