@@ -11,7 +11,8 @@
  class  GameBoard extends Component {
 
   state = {
-      answerCorrect: false
+      answerCorrect: false,
+      toggleShowNextQuestion: false
   }
 
   checkAnswer = (userInput, question) => {
@@ -26,14 +27,16 @@
 
         this.props.updateGameState(question, true);
         this.setState({
-            answerCorrect: true
+            answerCorrect: true,
+            toggleShowNextQuestion: true
         })
 
     } else {
         console.log('Sorry.  Try the next question')
         this.props.updateGameState(question, false);
         this.setState({
-            answerCorrect: false
+            answerCorrect: false,
+            toggleShowNextQuestion: true
         })
     }
     
@@ -46,45 +49,31 @@ handleChange = (event) => {
 
     }
 
-    getQuestion = () => {
-        console.log("Fetching next question from the collection");
-        this.setState({
-            currentQuestion: this.props.questionList.pop()
-        })
-        console.log('Question from the stack = ', this.state.currentQuestion)
-    }
-
     
 
      render () { 
 
       
-        const { userList, questionList, updateGameState, totalQuestions, numberCorrect, numberWrong, pointsEarned, endGame } = this.props;
+        const { userList, questionList, updateGameState, totalQuestions, numberCorrect, numberWrong, pointsEarned, endGame, currentQuestion, getNextQuestion } = this.props;
 
          return (
              <>
-{/*             
+     
                 <GameQuestion
-                    question={this.state.currentQuestion}
+                    question={currentQuestion}
                     updateGameState={updateGameState}
                     checkAnswer={this.checkAnswer}
-                    /> */}
-       
-              {questionList.map(question => 
-                <GameQuestion 
-                    key={question.id} 
-                    question={question} 
-                    updateGameState={updateGameState}
-                    checkAnswer={this.checkAnswer}
-                    />
-                )} 
+                    /> 
+
+                    
 
 {/* have to show appropriate message when answer is incorrect. */}
-                {this.state.answerCorrect ?
-                <div>Congrats!</div> :
-                ""}
+              
 
                 
+                    {this.state.toggleShowNextQuestion ?
+                        <div><button className="next_question" value="next_question" onClick={() => getNextQuestion()}>Get Next Question</button></div> :
+                        ""}
                 <div className="game_status">
                     <GameStatus 
                         totalQuestions={totalQuestions} 
@@ -102,7 +91,7 @@ handleChange = (event) => {
                 </div>
              
              <div className="end_game">
-                 <button type="submit" value="end_game" onClick={() => endGame()}>Stop Playing</button>
+                 <button type="submit" value="end_game" onClick={() => endGame(numberCorrect, numberWrong)}>Stop Playing</button>
              </div>
              </>
          )

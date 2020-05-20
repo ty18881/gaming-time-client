@@ -17,7 +17,8 @@ class App extends Component {
     numberCorrect: 0,
     numberWrong: 0,
     totalQuestions: 0,
-    pointsEarned: 0
+    pointsEarned: 0,
+    currentQuestion: {}
   }
 
   // retrieve known user names from the database
@@ -53,13 +54,19 @@ componentDidMount = async () => {
 
     this.setState({
       initialUsers: userList,
-      initialQuestions: questionList
+      currentQuestion: questionList.pop(),
+      initialQuestions: questionList,
+      
     })
 
     console.log("Loaded Users", userList);
     console.log("Loaded Questions", questionList)
 }
 
+
+
+
+ 
 handleChange = (event) => {
 
   console.log('Form Change detected')
@@ -149,6 +156,24 @@ updateGameState = (question, answeredCorrectly) => {
  
 }
 
+
+/**
+ * Return next question from the collection stored in state.
+ */
+getNextQuestion = () => {
+  console.log("Fetching next question from the collection");
+  let tempArray = this.state.initialQuestions;
+  if (tempArray.length > 0) {
+    this.setState({
+      currentQuestion: tempArray.pop()
+  })
+  console.log('Question from the stack = ', this.state.currentQuestion)
+  } else {
+    console.log("no more questions")
+  }
+  
+}
+
   render() {
   return (
     <div className="App">
@@ -161,6 +186,8 @@ updateGameState = (question, answeredCorrectly) => {
         numberCorrect={this.state.numberCorrect}
         numberWrong={this.state.numberWrong}
         pointsEarned={this.state.pointsEarned}
+        currentQuestion={this.state.currentQuestion}
+        getNextQuestion={this.getNextQuestion}
       />    
       
 
