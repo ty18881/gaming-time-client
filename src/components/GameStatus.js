@@ -15,20 +15,23 @@ import React, { Component, useState } from 'react';
 
         return(
             <>
-
-            <div className="game_status">
-               <div className="total"> 
-                   Total Questions: {totalQuestions}
-               </div>
-               <div className="num_correct">
-                    Number Correct: {numberCorrect}
-               </div>
-               <div className="num_wrong">
-                    Number Incorrect: {numberWrong}
-               </div>
-                  
-            </div>
             
+           
+            <div className="game_status">
+                <div className="total"> 
+                   <h1>
+                        Total Questions: {totalQuestions}  
+                    </h1> 
+                </div>
+                <div className="num_correct">
+                        <h1>Number Correct: {numberCorrect}</h1>
+                </div>
+                <div className="num_wrong">
+                        <h1>Number Incorrect: {numberWrong}</h1>
+                </div>
+                    
+            </div>
+           
             </>
         )
     }

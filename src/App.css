@@ -1,38 +1,131 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap');
+
+:root {
+  --black: rgba(0, 0, 0, 1);
+  --oasis-green: rgba(131, 151, 136, 1);
+  --orange: rgba(263, 97, 10, 1);
+  --shady-sand: rgba(186, 168, 152, 1);
+  --plum: rgba(164, 10, 60, 1);
+}
+
+h1 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+.container {
+  display: grid;
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+  grid-template-areas:
+    "header header header"
+    "nav content aside"
+    "footer footer footer";
+  grid-template-columns: 20% 1fr 20%;
+  /* grid-template-rows: auto 1fr 200px; */
+  grid-template-rows: auto auto auto;
+  grid-gap: 10px;
+  height: 100vh;
+  font-family: 'Coming Soon', cursive;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* background-image: linear-gradient(red, yellow); */
+  background-image: url("/images/scienceBorder.jpg");
+  background-repeat: repeat;
+  background-size: contain;
+  background-blend-mode: lighten;
+  /* background-color: bisque; */
   color: white;
+  font-weight: bolder;
+  align-content: space-evenly;
 }
 
-.App-link {
-  color: #61dafb;
+header {
+  grid-area: header;
+ 
+  /* background-color: var(--plum); */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+nav {
+  grid-area: nav;
+  margin-left: 0.5rem;
+  
+  /* background-color: var(--plum); */
+}
+
+main {
+  grid-area: content;
+  margin: auto;
+  /* background-color: var(--orange); */
+}
+
+aside {
+  grid-area: aside;
+  margin-right: 0.5rem;
+  
+  /* background-color: var(--plum); */
+}
+
+footer {
+  grid-area: footer;
+  background-color: var(--oasis-blue);
+}
+
+.nextquestion {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.check_answer {
+  display: inline-flex;
+  /* flex-direction: initial; */
+}
+form {
+  display: grid;
+  grid-template-columns: [labels] auto [controls] 1fr;
+  grid-auto-flow: row;
+  grid-gap: .3em;
+  background: #eee;
+  padding: .1em;
+}
+
+form > label  {
+  grid-column: labels;
+  grid-row: auto;
+}
+
+form > input,
+form > textarea,
+form > button {
+  grid-column: controls;
+  grid-row: auto;
+  border: none;
+  padding: .2em;
+}
+
+body {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-areas:
+      "header"
+      "nav"
+      "content"
+      "aside"
+      "footer";
+
+    grid-template-columns: 1fr;
+    grid-template-rows:
+      auto /* Header */
+      minmax(200px, auto) /* Nav */
+      1fr /* Content */
+      minmax(75px, auto) /* Sidebar */
+      auto; /* Footer */
   }
-  to {
-    transform: rotate(360deg);
+
+  nav, aside {
+    margin: 0;
+  }
+  nav {
+    padding: 20px 20%
   }
 }

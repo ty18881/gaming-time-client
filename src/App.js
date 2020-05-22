@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
-import './App.css';
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Header from './components/Header';
 import Main from './components/Main'
+import Footer from './components/Footer';
+
+
+
 
 class App extends Component {
 
@@ -18,7 +23,9 @@ class App extends Component {
     numberWrong: 0,
     totalQuestions: 0,
     pointsEarned: 0,
-    currentQuestion: {}
+    currentQuestion: {},
+    lastQuestion: false,
+    toggleShowNextQuestion: false
   }
 
   // retrieve known user names from the database
@@ -170,14 +177,37 @@ getNextQuestion = () => {
   console.log('Question from the stack = ', this.state.currentQuestion)
   } else {
     console.log("no more questions")
+    
   }
   
+  if (tempArray.length === 0) {
+    this.setState({
+      lastQuestion: true,
+      toggleShowNextQuestion: false
+    })
+  }
 }
+
+/**
+ * finish game
+ * All questions have been answered.
+ * time to save results to the database
+ */
+
+ finishGame = () => {
+   console.log("Congrats!  You finished all the questions!")
+ }
 
   render() {
   return (
     <div className="App">
+     <div className="container">
+     
       <Header />
+      <br/>
+
+      
+
       <Main 
         userList={this.state.initialUsers}
         questionList={this.state.initialQuestions}
@@ -188,9 +218,13 @@ getNextQuestion = () => {
         pointsEarned={this.state.pointsEarned}
         currentQuestion={this.state.currentQuestion}
         getNextQuestion={this.getNextQuestion}
+        lastQuestion={this.state.lastQuestion}
+        finishGame={this.finishGame}
+        toggleShowNextQuestion={this.state.toggleShowNextQuestion}
       />    
-      
-
+     
+     <Footer />
+     </div>
     </div>
   );
 }

@@ -6,9 +6,10 @@ function ProgressBar(props) {
         
         return (
             <>
+            
             <h1> Current Progress</h1>
             <h2> So far you have {pointsEarned} points Today!</h2>
-
+            
             
             </>
         )

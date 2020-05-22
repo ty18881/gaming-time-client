@@ -6,8 +6,11 @@ class Header extends Component {
 
         return (
             <>
-            <div>Win XBOX Time Here!</div>
-            <div>Probably park save, start new game, exit game buttons here.  Don't know yet</div>
+            <header>
+            <h1>
+                Earn XBOX Time!  Just answer a few math questions!
+            </h1>
+            </header>
             </>
         )
     }

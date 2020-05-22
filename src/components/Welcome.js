@@ -29,7 +29,7 @@
                 
                 <input type="submit" value="Save the email address" />
             </form>
-            <h3>Here's how to play - blah, blah,blah</h3>
+            <h3>Here's how to play - blah, blah,blah Maybe a separate welcome message component???</h3>
             </>
         )
      }

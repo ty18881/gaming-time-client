@@ -7,20 +7,21 @@
  import GameQuestion from './GameQuestion';
  import GameStatus from './GameStatus';
  import ProgressBar from './ProgressBar';
+ import Button from 'react-bootstrap/Button';
 
  class  GameBoard extends Component {
 
   state = {
       answerCorrect: false,
-      toggleShowNextQuestion: false
+      
   }
 
   checkAnswer = (userInput, question) => {
     console.log(`You submitted ${userInput}.  Let's see if that is correct`);
     console.log(`the correct answer is ${question.answer}`)
 
-    // loose comparison because userInput is a string while question.answer is an integer
-    if (userInput == question.answer) {
+    // user input captured as a string.  parsing to integer for the comparison step.
+    if (parseInt(userInput) === question.answer) {
         console.log(`YOU DID IT!  ${userInput} is correct!`);
 
         // update the state of the game.
@@ -49,21 +50,37 @@ handleChange = (event) => {
 
     }
 
-    
+keyPressed = (event, userInput, question) => {
+    if (event.key === 'Enter') {
+        console.log('Detected Enter Key Pressed')
+    }
+console.log(`User input ${userInput}`)
+console.log(`the answer = ${question.answer}`)
+//    this.checkAnswer(userInput, question);
+// this here messes up the GameState
+  // not sure if this is bad form but doing it anyway.
+
+}  
 
      render () { 
 
       
-        const { userList, questionList, updateGameState, totalQuestions, numberCorrect, numberWrong, pointsEarned, endGame, currentQuestion, getNextQuestion } = this.props;
+        const { userList, questionList, updateGameState, totalQuestions, numberCorrect, numberWrong, pointsEarned, endGame, currentQuestion, getNextQuestion, lastQuestion, finishGame, toggleShowNextQuestion } = this.props;
 
          return (
              <>
-     
+            <main>
+            <div className="game_question">
+               
                 <GameQuestion
                     question={currentQuestion}
                     updateGameState={updateGameState}
                     checkAnswer={this.checkAnswer}
+                    keyPressed={this.keyPressed}
                     /> 
+        
+            </div> 
+                 
 
                     
 
@@ -71,10 +88,14 @@ handleChange = (event) => {
               
 
                 
-                    {this.state.toggleShowNextQuestion ?
-                        <div><button className="next_question" value="next_question" onClick={() => getNextQuestion()}>Get Next Question</button></div> :
+                    {!toggleShowNextQuestion && !lastQuestion ?
+                        <div className="nextquestion"><Button variant="primary" size="sm" className="next_question" value="next_question" onClick={() => getNextQuestion()}>Get Next Question</Button></div> :
                         ""}
+
+                </main>
+                <aside>
                 <div className="game_status">
+                    
                     <GameStatus 
                         totalQuestions={totalQuestions} 
                         numberCorrect={numberCorrect}
@@ -82,17 +103,27 @@ handleChange = (event) => {
                         
                     />
 
-                </div>
-                <div className="progress_bar">
 
+                    
+                {lastQuestion && !toggleShowNextQuestion ? 
+                <div className="finish_game"><Button variant="primary" size="sm" className="finish_game" value="finish_game" onClick={() => endGame(numberCorrect, numberWrong)}>Finished!  Click to Save Your Results!</Button></div> :
+                ""}
+                </div>
+                </aside>
+                <nav>
+                <div className="progress_bar">
+                   
                     <ProgressBar 
                         pointsEarned={pointsEarned}
                     />
+                    
                 </div>
-             
+                </nav>
+            <footer>
              <div className="end_game">
-                 <button type="submit" value="end_game" onClick={() => endGame(numberCorrect, numberWrong)}>Stop Playing</button>
+                 <Button variant="primary" size="lg" type="submit" value="end_game" onClick={() => endGame(numberCorrect, numberWrong)} block>Stop Playing</Button>
              </div>
+             </footer>
              </>
          )
         }
