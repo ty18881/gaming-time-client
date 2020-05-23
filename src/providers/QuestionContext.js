@@ -9,52 +9,36 @@ export const QuestionContext = createContext();
 
 export const QuestionProvider = (props) => {
     
-    // empty array we're going to load from the database.
-    let questionList = [];
+    // the below code leads to the question array being empty when the GameBoard renders.
+    // const [questions, setQuestions] = useState([]);
 
-    // need to fetch the list of questions into an array that will be passed via useState;
-    // const fetchGameQuestions = new Promise((resolve, reject) => {
-    //     console.log('Fetching questions from the database');
-    //     fetch(`${process.env.REACT_APP_BASEURL}/questions`)
-    //     .then((response) => response.json())
-    //     .then((jData) => {
-    //         resolve(jData);
-    //     })
-    //     console.log('Questions Fetched');
-        
-    //   });
+    // const URL = `${process.env.REACT_APP_BASEURL}/questions`;
+    // console.log(`We're hitting ${URL} for our query`);
 
-    //    const fetchGameQuestions = async() => {
-    //     console.log('Fetching questions from the database');
+    // const fetchGameQuestions = async () => {
+
+    //     console.log()
     //     try {
-    //         const questionData = await fetch(`${process.env.REACT_APP_BASEURL}/questions`);
-           
-    //         questionList = await questionData.json();
-    //         console.log('Json Data returned: ', questionList);
-    //         setQuestions(questionList);
-    //         // push questionsList to state at this point.
-    //     } catch (error) {
-    //         console.log(error)
+
+    //         await fetch(`${URL}`)
+    //         .then((response) => response.json())
+    //         .then((jData) => setQuestions(jData));
+            
+    //     } catch (e) {
+    //         if (e) {
+    //             console.log(e);
+    //         }
     //     }
-    //     console.log('Questions Fetched');
-        
-    //   };
-
-    // useEffect(() => {
-    //     console.log("fetching the questions");
-    //     fetchGameQuestions()
-    // }, []);
-
-    // const componentDidMount = async () => {
-    
-    //     console.log('Executing Component did mount');
-    //     questionList = await fetchGameQuestions;
-    //     console.log("Loaded Questions", questionList)
     // }
 
-    // 2020.05.22 - FETCH ISN'T WORKING SO revert to hard coding the questions for now.
-    // need to continue testing the context work.
-    // const [questions, setQuestions] = useState(questionList);
+    // useEffect(() => {
+    //     fetchGameQuestions()
+    // }, []);
+  
+    // console.log('questions', questions);
+    
+    
+    
 
     const [questions, setQuestions] = useState([
         { id: 1, operator: 'x', operand1: 4, operand2: 1, answer: 4 , point_value: 2},

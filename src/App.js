@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,62 +13,12 @@ import GameStatusProvider from './providers/GameStatusContext';
 import UserContextProvider from './providers/UserContext'
 
 import GameBoard from './components/GameBoard';
+import Welcome from './components/Welcome';
+import About from './components/About';
+import Footer from './components/Footer'
 
 class App extends Component {
 
-
-  // retrieve known user names from the database
-
-//   fetchUserNames = new Promise((resolve, reject) => {
-//     console.log('Fetching user names from the database');
-//     console.log( `${process.env.REACT_APP_BASEURL}/users`)
-//     fetch(`${process.env.REACT_APP_BASEURL}/users`)
-//     .then((response) => response.json())
-//     .then((jData) => {
-//         resolve(jData);
-//     })
-  
-// });
-
-// fetch game questions from the database
-
-// fetchGameQuestions = new Promise((resolve, reject) => {
-//   console.log('Fetching questions from the database');
-//   fetch(`${process.env.REACT_APP_BASEURL}/questions`)
-//   .then((response) => response.json())
-//   .then((jData) => {
-//       resolve(jData);
-//   })
-// });
-
-// make sure we wait for the fetch to complete before attempting to 
-// put the values into state.
-
-// componentDidMount = async () => {
-//     let userList = await this.fetchUserNames;
-//     // let questionList = await this.fetchGameQuestions;
-
-//     this.setState({
-//       initialUsers: userList,
-    
-      
-//     })
-
- 
-// }
-
-
-
-
- 
-handleChange = (event) => {
-
-  console.log('Form Change detected')
-  console.log(`event = ${event.target.value}`)
-  this.setState({
-      value: event.target.value
-  })
-}
 
 handleSubmit = (event) => {
   console.log('do we recognize this user?');
@@ -113,22 +65,31 @@ handleAddParentEmail = (event) => {
   render() {
   return (
 
-    <UserContextProvider>
-        <QuestionProvider>
-          <GameStatusProvider>
-        <div className="App">
-        <div className="container">
-        
-          <Header />
-          <br/>
+    <Router>
+      <UserContextProvider>
+          <QuestionProvider>
+            <GameStatusProvider>
+          <div className="App">
+              <div className="container">
+              
+                <Header />
+                <br/>
 
-          <GameBoard/>    
-        
-        </div>
-        </div>
-        </GameStatusProvider>
-        </QuestionProvider>
-    </UserContextProvider>
+                <GameBoard/>    
+              
+              <Footer />
+
+              <Switch>
+                {/* <Route path="/about" exact component={About} /> */}
+                <Route path="/welcome" component={Welcome} />
+              </Switch>
+
+              </div>
+          </div>
+          </GameStatusProvider>
+          </QuestionProvider>
+      </UserContextProvider>
+    </Router>
   );
 }
 }

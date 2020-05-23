@@ -1,3 +1,7 @@
+/**
+ * This component displays the progress towards extra time the player has earned
+ * Perfect world, it would update after every game is completed.
+ */
 import React, {Components, useState } from 'react'
 
 function ProgressBar(props) {

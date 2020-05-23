@@ -20,10 +20,10 @@ import React, { Component, useState } from 'react';
                     </h1> 
                 </div>
                 <div className="num_correct">
-                        <h1>Number Correct: {numberCorrect}</h1>
+                        <h1>Correct: {numberCorrect}</h1>
                 </div>
                 <div className="num_wrong">
-                        <h1>Number Incorrect: {numberWrong}</h1>
+                        <h1>Incorrect: {numberWrong}</h1>
                 </div>
                     
             </div>
