@@ -52,6 +52,10 @@ const getNextQuestion = () => {
 
     // set effect to keep the whole board from re-rendering every time we pull a question from the stack???
 
+    const endGame = (numberCorrect, numberWrong ) => {
+        console.log('Game is over - Gotta save results to the database');
+    }
+
 
    const checkAnswer = (question, userInput) => {
         console.log(`You submitted ${userInput}.  Let's see if that is correct`);
@@ -88,7 +92,15 @@ const getNextQuestion = () => {
                             /> 
                 
                     </div> :
-                    <div> ALL DONE - Game Over!</div>
+                    <div className="finish_game">
+                        <Button variant="primary" 
+                            size="sm" 
+                            value="finish_game" 
+                            onClick={() => endGame(numberCorrect, numberWrong)}>
+                                
+                            Finished!  Click to Save Your Results!
+                        </Button>
+                    </div>
                 
                 }
                        
