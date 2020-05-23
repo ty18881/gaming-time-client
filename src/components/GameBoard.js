@@ -3,7 +3,7 @@
  * 
  */
 
- import React, { Component, useState, useContext } from 'react';
+ import React, { Component, useState, useContext, useEffect } from 'react';
  import GameQuestion from './GameQuestion';
  import GameStatus from './GameStatus';
  import ProgressBar from './ProgressBar';
@@ -17,7 +17,11 @@
  const  GameBoard = (props) => {
 
     const { questions } = useContext(QuestionContext);
-    const {firstQuestion} = useContext(QuestionContext);
+    // const {firstQuestion} = useContext(QuestionContext);
+    const {nextQuestion} = useContext(QuestionContext);
+    const {setNextQuestion} = useContext(QuestionContext);
+    const {lastQuestion} = useContext(QuestionContext);
+    const {setLastQuestion} = useContext(QuestionContext);
 
     const { totalQuestions } = useContext(GameStatusContext);
     const {setTotalQuestions} = useContext(GameStatusContext);
@@ -30,27 +34,22 @@
     const {answerCorrect} = useContext(GameStatusContext);
     const {setAnswerCorrect} = useContext(GameStatusContext);
 
-    const {nextQuestion, setNextQuestion} = useState('');
+    
 
 
-
-// keyPressed = (event, userInput, question) => {
-//     if (event.key === 'Enter') {
-//         console.log('Detected Enter Key Pressed')
-//     }
-// console.log(`User input ${userInput}`)
-// console.log(`the answer = ${question.answer}`)
-// //    this.checkAnswer(userInput, question);
-// // this here messes up the GameState
-//   // not sure if this is bad form but doing it anyway.
-
-// }  
 
 const getNextQuestion = () => {
     console.log("Fetching next question from the collection");
-    setNextQuestion(questions.pop());
-   
+    // if we are out of questions, the screen needs to behave differently.
+    questions.length > 0 ? setNextQuestion(questions.pop()) : setLastQuestion(true)   
+    console.log(`Next Question is ${nextQuestion}`)
   }
+
+  useEffect(() => {
+      console.log('Trying effect to render next question');
+      getNextQuestion();
+  }, [questions])
+
     // set effect to keep the whole board from re-rendering every time we pull a question from the stack???
 
 
@@ -78,27 +77,24 @@ const getNextQuestion = () => {
          return (
              <>
             <main>
-            <div className="game-question">
-               
-                <GameQuestion
-                    question={nextQuestion}
-                    checkAnswer={checkAnswer}
-                    /> 
-        
-            </div> 
-                 
 
-                    
+                {!lastQuestion ?
+                        <div className="game-question">
+                                
+                        <GameQuestion
+                            question={nextQuestion}
+                            checkAnswer={checkAnswer}
+                            getNextQuestion={getNextQuestion}
+                            /> 
+                
+                    </div> :
+                    <div> ALL DONE - Game Over!</div>
+                
+                }
+                       
+            </main>
 
-{/* have to show appropriate message when answer is incorrect. */}
-              
 
-{/*                 
-                    {!toggleShowNextQuestion && !lastQuestion ?
-                        <div className="nextquestion"><Button variant="primary" size="sm" className="next_question" value="next_question" onClick={() => getNextQuestion()}>Get Next Question</Button></div> :
-                        ""} */}
-
-                </main>
                 {/* <aside>
                 <div className="game_status">
                     

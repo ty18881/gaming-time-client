@@ -71,12 +71,15 @@ export const QuestionProvider = (props) => {
     const [answerCorrect, setAnswerCorrect] = useState(false);
     const [showNextQuestion, setShowNextQuestion ] = useState(false);
     const [firstQuestion, setFirstQuestion] = useState(questions[0]);
+    const [nextQuestion, setNextQuestion] = useState({})
+
+    const [lastQuestion, setLastQuestion] = useState(false);
 
     // think we only have to export the non-setter functions???
     return(
         <QuestionContext.Provider 
             value={{
-                firstQuestion, questions,  answerCorrect, setAnswerCorrect, showNextQuestion, setShowNextQuestion
+                firstQuestion, questions,  answerCorrect, setAnswerCorrect, showNextQuestion, setShowNextQuestion, nextQuestion, setNextQuestion, lastQuestion, setLastQuestion
             }}
            
             >
