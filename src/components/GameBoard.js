@@ -100,6 +100,7 @@ const getNextQuestion = () => {
 
 
    const checkAnswer = (question, userInput) => {
+
         console.log(`You submitted ${userInput}.  Let's see if that is correct`);
         console.log(`the correct answer is ${question.answer}`)
 
@@ -118,7 +119,8 @@ const getNextQuestion = () => {
             setNumberWrong(numberWrong+1);
             setTotalQuestions(totalQuestions+1);
         }
-    
+       
+       
     }
          return (
              <>

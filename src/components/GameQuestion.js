@@ -3,18 +3,16 @@
  * on the user's screen.
  */
 
- import React, { useContext, useState } from 'react';
-//  import { QuestionContext } from '../providers/QuestionContext';
-//  import { GameStatusContext } from '../providers/GameStatusContext';
+ import React, { useState } from 'react';
+
 
 import Button from 'react-bootstrap/Button';
     
 const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
 
 
-        // const { questions } = useContext(QuestionContext);
-        // const { firstQuestion } = useContext(QuestionContext);
         const [userInput, setUserInput] = useState('');
+        const [disabled, setDisable] = useState(false);
 
         return (
 
@@ -30,7 +28,8 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
                         size="sm"
                         type="input"
                         value="check-answer"
-                        onClick={() => {checkAnswer(question, userInput)}}
+                        onClick={() => {checkAnswer(question, userInput); setDisable(true)}}
+                        disabled={disabled}
                     >
                         Check Your Answer!
                     </Button>
@@ -40,7 +39,7 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
                                 size="sm" 
                                 className="next_question" 
                                 value="next_question" 
-                                onClick={() => getNextQuestion()}>
+                                onClick={() => {getNextQuestion(); setDisable(false)}}>
                                     Get Next Question
                             </Button>
                             

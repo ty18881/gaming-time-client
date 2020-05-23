@@ -4,8 +4,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Header from './components/Header';
-import Main from './components/Main'
-import Footer from './components/Footer';
+
 
 import {QuestionProvider} from './providers/QuestionContext';
 import GameStatusProvider from './providers/GameStatusContext';
@@ -112,24 +111,6 @@ handleAddParentEmail = (event) => {
 }
 
 
-
-
-
-/**
- * Return next question from the collection stored in state.
- */
-
-
-/**
- * finish game
- * All questions have been answered.
- * time to save results to the database
- */
-
- finishGame = () => {
-   console.log("Congrats!  You finished all the questions!")
- }
-
   render() {
   return (
 
@@ -141,24 +122,7 @@ handleAddParentEmail = (event) => {
       <Header />
       <br/>
 
-      <GameBoard/>
-      {/* <GameStatus /> */}
-{/* 
-      <Main 
-        userList={this.state.initialUsers}
-        questionList={this.state.initialQuestions}
-        updateGameState={this.updateGameState}
-        totalQuestions={this.state.totalQuestions}
-        numberCorrect={this.state.numberCorrect}
-        numberWrong={this.state.numberWrong}
-        pointsEarned={this.state.pointsEarned}
-        currentQuestion={this.state.currentQuestion}
-        getNextQuestion={this.getNextQuestion}
-        lastQuestion={this.state.lastQuestion}
-        finishGame={this.finishGame}
-        toggleShowNextQuestion={this.state.toggleShowNextQuestion}
-      />     */}
-     
+      <GameBoard/>    
      
      </div>
     </div>
