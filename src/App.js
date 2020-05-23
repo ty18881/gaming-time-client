@@ -8,6 +8,7 @@ import Header from './components/Header';
 
 import {QuestionProvider} from './providers/QuestionContext';
 import GameStatusProvider from './providers/GameStatusContext';
+import UserContextProvider from './providers/UserContext'
 
 import GameBoard from './components/GameBoard';
 
@@ -16,16 +17,16 @@ class App extends Component {
 
   // retrieve known user names from the database
 
-  fetchUserNames = new Promise((resolve, reject) => {
-    console.log('Fetching user names from the database');
-    console.log( `${process.env.REACT_APP_BASEURL}/users`)
-    fetch(`${process.env.REACT_APP_BASEURL}/users`)
-    .then((response) => response.json())
-    .then((jData) => {
-        resolve(jData);
-    })
+//   fetchUserNames = new Promise((resolve, reject) => {
+//     console.log('Fetching user names from the database');
+//     console.log( `${process.env.REACT_APP_BASEURL}/users`)
+//     fetch(`${process.env.REACT_APP_BASEURL}/users`)
+//     .then((response) => response.json())
+//     .then((jData) => {
+//         resolve(jData);
+//     })
   
-});
+// });
 
 // fetch game questions from the database
 
@@ -41,20 +42,18 @@ class App extends Component {
 // make sure we wait for the fetch to complete before attempting to 
 // put the values into state.
 
-componentDidMount = async () => {
-    let userList = await this.fetchUserNames;
-    // let questionList = await this.fetchGameQuestions;
+// componentDidMount = async () => {
+//     let userList = await this.fetchUserNames;
+//     // let questionList = await this.fetchGameQuestions;
 
-    this.setState({
-      initialUsers: userList,
-      // currentQuestion: questionList.pop(),
-      // initialQuestions: questionList,
+//     this.setState({
+//       initialUsers: userList,
+    
       
-    })
+//     })
 
-    // console.log("Loaded Users", userList);
-    // console.log("Loaded Questions", questionList)
-}
+ 
+// }
 
 
 
@@ -114,20 +113,22 @@ handleAddParentEmail = (event) => {
   render() {
   return (
 
-    <QuestionProvider>
-      <GameStatusProvider>
-    <div className="App">
-     <div className="container">
-     
-      <Header />
-      <br/>
+    <UserContextProvider>
+        <QuestionProvider>
+          <GameStatusProvider>
+        <div className="App">
+        <div className="container">
+        
+          <Header />
+          <br/>
 
-      <GameBoard/>    
-     
-     </div>
-    </div>
-    </GameStatusProvider>
-    </QuestionProvider>
+          <GameBoard/>    
+        
+        </div>
+        </div>
+        </GameStatusProvider>
+        </QuestionProvider>
+    </UserContextProvider>
   );
 }
 }

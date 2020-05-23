@@ -12,7 +12,7 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
 
 
         const [userInput, setUserInput] = useState('');
-        const [disabled, setDisable] = useState(false);
+        const [repeatAnswerDisabled, setRepeatAnswerDisabled] = useState(false);
 
         return (
 
@@ -28,8 +28,8 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
                         size="sm"
                         type="input"
                         value="check-answer"
-                        onClick={() => {checkAnswer(question, userInput); setDisable(true)}}
-                        disabled={disabled}
+                        onClick={() => {checkAnswer(question, userInput); setRepeatAnswerDisabled(true); setUserInput('')}}
+                        disabled={repeatAnswerDisabled}
                     >
                         Check Your Answer!
                     </Button>
@@ -39,7 +39,7 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
                                 size="sm" 
                                 className="next_question" 
                                 value="next_question" 
-                                onClick={() => {getNextQuestion(); setDisable(false)}}>
+                                onClick={() => {getNextQuestion(); setRepeatAnswerDisabled(false)}}>
                                     Get Next Question
                             </Button>
                             
