@@ -31,6 +31,8 @@ export const QuestionProvider = (props) => {
            
     //         questionList = await questionData.json();
     //         console.log('Json Data returned: ', questionList);
+    //         setQuestions(questionList);
+    //         // push questionsList to state at this point.
     //     } catch (error) {
     //         console.log(error)
     //     }
@@ -55,17 +57,18 @@ export const QuestionProvider = (props) => {
     // const [questions, setQuestions] = useState(questionList);
 
     const [questions, setQuestions] = useState([
-        { id: 1, operator: 'x', operand1: 4, operand2: 2, answer: 8 , point_value: 2},
-        { id: 2, operator: 'x', operand1: 4, operand2: 3, answer: 8 , point_value: 12},
-        { id: 3, operator: 'x', operand1: 4, operand2: 4, answer: 8 , point_value: 16},
-        { id: 4, operator: 'x', operand1: 4, operand2: 5, answer: 8 , point_value: 20},
-        { id: 5, operator: 'x', operand1: 4, operand2: 6, answer: 8 , point_value: 24},
-        { id: 6, operator: 'x', operand1: 4, operand2: 7, answer: 8 , point_value: 28},
-        { id: 7, operator: 'x', operand1: 4, operand2: 8, answer: 8 , point_value: 32},
-        { id: 8, operator: 'x', operand1: 4, operand2: 9, answer: 8 , point_value: 36},
-        { id: 9, operator: 'x', operand1: 4, operand2: 10, answer: 8 , point_value: 40},
-        { id: 10, operator: 'x', operand1: 4, operand2: 11, answer: 8 , point_value: 44},
-        { id: 11, operator: 'x', operand1: 4, operand2: 12, answer: 8 , point_value: 48}
+        { id: 1, operator: 'x', operand1: 4, operand2: 1, answer: 4 , point_value: 2},
+        { id: 2, operator: 'x', operand1: 4, operand2: 2, answer: 8 , point_value: 2},
+        { id: 3, operator: 'x', operand1: 4, operand2: 3, answer: 12 , point_value: 2},
+        { id: 4, operator: 'x', operand1: 4, operand2: 4, answer: 16 , point_value: 2},
+        { id: 5, operator: 'x', operand1: 4, operand2: 5, answer: 20 , point_value: 2},
+        { id: 6, operator: 'x', operand1: 4, operand2: 6, answer: 24 , point_value: 2},
+        { id: 7, operator: 'x', operand1: 4, operand2: 7, answer: 28 , point_value: 2},
+        { id: 8, operator: 'x', operand1: 4, operand2: 8, answer: 32 , point_value: 2},
+        { id: 9, operator: 'x', operand1: 4, operand2: 9, answer: 36 , point_value: 2},
+        { id: 10, operator: 'x', operand1: 4, operand2: 10, answer: 40 , point_value: 2},
+        { id: 11, operator: 'x', operand1: 4, operand2: 11, answer: 44 , point_value: 2},
+        { id: 12, operator: 'x', operand1: 4, operand2: 12, answer: 48 , point_value: 2}
     ])
 
     const [answerCorrect, setAnswerCorrect] = useState(false);

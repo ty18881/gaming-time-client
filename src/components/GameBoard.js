@@ -52,9 +52,51 @@ const getNextQuestion = () => {
 
     // set effect to keep the whole board from re-rendering every time we pull a question from the stack???
 
-    const endGame = (numberCorrect, numberWrong ) => {
-        console.log('Game is over - Gotta save results to the database');
+    // const endGame = (numberCorrect, numberWrong ) => {
+    //     console.log('Game is over - Gotta save results to the database');
+    // }
+
+
+    const endGame = (numberCorrect, numberWrong) => {
+        console.log('Game over!  Thanks for playing!')
+        let timeEarned = Math.round(pointsEarned / 15 ) * 15;
+        let finishDate = new Date().toDateString();
+
+        // format the date so our DB doesn't choke.
+
+        // this object holds both the game and progress report elements so we hit the DB one time.
+        let progressReport = {date: finishDate, time_earned: timeEarned, user_id: 1, num_correct: numberCorrect, num_wrong: numberWrong}
+        console.log(`Progress Report = ${progressReport}`)
+        saveProgressReport(progressReport);
+
+
     }
+
+    // I actually want this to happen in the game status context instead but we'll get there.
+    /**
+     * save progress to the database.
+     * Progressreport model expects the following
+     * Date
+     * Amount of time earned
+     * User Id to identify the user who earned the time.
+     * 
+     *  */ 
+    
+   const saveProgressReport = (gameProgress) => {
+       fetch('http://localhost:3000/progressreports', {
+           body: JSON.stringify(gameProgress),
+           method: 'POST',
+           headers: {
+               'Accept': 'application/json, text/plain, */*',
+               'Content-Type': 'application/json'
+           }
+       })
+       .then(createdReport => createdReport.json())
+       .then(jsonedReport => console.log('New Report Created', jsonedReport))
+       .catch(error => console.log(error));
+        
+    }
+
 
 
    const checkAnswer = (question, userInput) => {
@@ -80,6 +122,9 @@ const getNextQuestion = () => {
     }
          return (
              <>
+             {/* Main is where the each game question renders.
+                When we are out of questions, a button appears to end the game gracefully */}
+
             <main>
 
                 {!lastQuestion ?
@@ -106,8 +151,10 @@ const getNextQuestion = () => {
                        
             </main>
 
+{/* Aside is where the status of the current game is displayed
+    This is updated after each question is answered by the player */}
 
-                {/* <aside>
+                <aside>
                 <div className="game_status">
                     
                     <GameStatus 
@@ -116,14 +163,14 @@ const getNextQuestion = () => {
                         numberWrong={numberWrong}
                         
                     />
-
-
-                    
-                {lastQuestion && !toggleShowNextQuestion ? 
-                <div className="finish_game"><Button variant="primary" size="sm" className="finish_game" value="finish_game" onClick={() => endGame(numberCorrect, numberWrong)}>Finished!  Click to Save Your Results!</Button></div> :
-                ""}
                 </div>
                 </aside>
+
+{/* Nav is where the Progress Bar lives
+    This tells the player how close they are to the next 
+    level of extra time. */}
+
+                
                 <nav>
                 <div className="progress_bar">
                    
@@ -133,11 +180,13 @@ const getNextQuestion = () => {
                     
                 </div>
                 </nav>
+               
+
             <footer>
              <div className="end_game">
                  <Button variant="primary" size="lg" type="submit" value="end_game" onClick={() => endGame(numberCorrect, numberWrong)} block>Stop Playing</Button>
              </div>
-             </footer> */}
+             </footer>
              </>
          )
         
