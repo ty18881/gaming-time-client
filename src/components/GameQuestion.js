@@ -3,37 +3,42 @@
  * on the user's screen.
  */
 
- import React, { Component, useState } from 'react';
+ import React, { useContext, useState } from 'react';
+ import { QuestionContext } from '../providers/QuestionContext';
+ import { GameStatusContext } from '../providers/GameStatusContext';
 
 import Button from 'react-bootstrap/Button';
+    
+const GameQuestion = ({checkAnswer}) => {
 
- function GameQuestion(props) {
 
-    const { question, handleGameState, checkAnswer, answerCorrect, keyPressed } = props;
+        const { questions } = useContext(QuestionContext);
+        const { firstQuestion } = useContext(QuestionContext);
+        const [userInput, setUserInput] = useState('');
 
-    const [userInput, setUserInput ] = useState();
-
-        
         return (
-            <>
-            <h1> Question # {question.id}</h1>
-            <h2> {question.operand1} {question.operator} {question.operand2} = 
-            
-                <input
-                type="text" placeholder=""
-                onChange={e => setUserInput(e.target.value)}
-                onKeyUp={e => keyPressed(e, userInput, question)}
-                />
-               
-            </h2>
-            <div className="check_answer"><Button variant="primary" size="sm" type="input" value="check_answer" onClick={() => {checkAnswer(userInput, question)}}>Check Your Answer!</Button></div>
 
-            {answerCorrect ?
-                <div>Congrats!</div> :
-                ""}
+            <>
+                <h2>Question # {firstQuestion.id}</h2>
+                <h3> {firstQuestion.operand1} {firstQuestion.operator} {firstQuestion.operand2} = </h3>
+                <input 
+                    type="text" placeholder="" value={userInput} onChange={(e) => setUserInput(e.target.value)}
+                />
+                <div> 
+                    <Button 
+                        variant="primary"
+                        size="sm"
+                        type="input"
+                        value="check-answer"
+                        onClick={() => {checkAnswer(firstQuestion, userInput)}}
+                    >
+                        Check Your Answer!
+                    </Button>
+                </div>
             </>
+           
         )
-  
+   
  }
 
  export default GameQuestion;

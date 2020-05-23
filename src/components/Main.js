@@ -60,13 +60,11 @@ function Main(props) {
     }
 
 
-  const { userList, questionList, updateGameState, totalQuestions, numberCorrect, numberWrong, pointsEarned, currentQuestion, getNextQuestion, lastQuestion, finishGame, toggleShowNextQuestion } = props 
+  const {  updateGameState, totalQuestions, numberCorrect, numberWrong, pointsEarned, currentQuestion, getNextQuestion, lastQuestion, finishGame, toggleShowNextQuestion } = props 
     return (
       
         
         <GameBoard 
-            userList={userList} 
-            questionList={questionList}
             updateGameState={updateGameState}
             totalQuestions={totalQuestions}
             numberCorrect={numberCorrect}

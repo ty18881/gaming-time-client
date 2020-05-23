@@ -7,12 +7,8 @@ import React, { Component, useState } from 'react';
  * Number Incorrect
  */
 
- class GameStatus extends Component {
-
-    render() {
-        const { totalQuestions, numberCorrect, numberWrong } = this.props;
-        
-
+ const GameStatus = ({ totalQuestions, numberCorrect, numberWrong}) => {
+      
         return(
             <>
             
@@ -34,7 +30,7 @@ import React, { Component, useState } from 'react';
            
             </>
         )
-    }
+
  }
 
  export default GameStatus;

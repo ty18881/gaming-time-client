@@ -7,32 +7,19 @@ import Header from './components/Header';
 import Main from './components/Main'
 import Footer from './components/Footer';
 
+import {QuestionProvider} from './providers/QuestionContext';
+import GameStatusProvider from './providers/GameStatusContext';
 
-
+import GameBoard from './components/GameBoard';
 
 class App extends Component {
 
-  state = {
-    initialUsers: [],
-    value: "",
-    currentUser: "",
-    isNewUser: true,
-    parentEmail: "",
-    initialQuestions: [],
-    numberCorrect: 0,
-    numberWrong: 0,
-    totalQuestions: 0,
-    pointsEarned: 0,
-    currentQuestion: {},
-    lastQuestion: false,
-    toggleShowNextQuestion: false
-  }
 
   // retrieve known user names from the database
 
   fetchUserNames = new Promise((resolve, reject) => {
     console.log('Fetching user names from the database');
-    console.log( `${process.env.REACT_APP_BASEURL}`)
+    console.log( `${process.env.REACT_APP_BASEURL}/users`)
     fetch(`${process.env.REACT_APP_BASEURL}/users`)
     .then((response) => response.json())
     .then((jData) => {
@@ -43,31 +30,31 @@ class App extends Component {
 
 // fetch game questions from the database
 
-fetchGameQuestions = new Promise((resolve, reject) => {
-  console.log('Fetching questions from the database');
-  fetch(`${process.env.REACT_APP_BASEURL}/questions`)
-  .then((response) => response.json())
-  .then((jData) => {
-      resolve(jData);
-  })
-});
+// fetchGameQuestions = new Promise((resolve, reject) => {
+//   console.log('Fetching questions from the database');
+//   fetch(`${process.env.REACT_APP_BASEURL}/questions`)
+//   .then((response) => response.json())
+//   .then((jData) => {
+//       resolve(jData);
+//   })
+// });
 
 // make sure we wait for the fetch to complete before attempting to 
 // put the values into state.
 
 componentDidMount = async () => {
     let userList = await this.fetchUserNames;
-    let questionList = await this.fetchGameQuestions;
+    // let questionList = await this.fetchGameQuestions;
 
     this.setState({
       initialUsers: userList,
-      currentQuestion: questionList.pop(),
-      initialQuestions: questionList,
+      // currentQuestion: questionList.pop(),
+      // initialQuestions: questionList,
       
     })
 
-    console.log("Loaded Users", userList);
-    console.log("Loaded Questions", questionList)
+    // console.log("Loaded Users", userList);
+    // console.log("Loaded Questions", questionList)
 }
 
 
@@ -125,68 +112,13 @@ handleAddParentEmail = (event) => {
 }
 
 
-/**
- * This method captures when player answers questions 
- * Used to capture the state of the game.
- */
 
-updateGameState = (question, answeredCorrectly) => {
-  console.log('Congrats! You are updating the game status');
-  console.log(`user answered ${question.id} and their answer was ${answeredCorrectly}`);
-
-  let total = this.state.totalQuestions;
-  let correct = this.state.numberCorrect;
-  let wrong = this.state.numberWrong;
-  let pointTotal = this.state.pointsEarned + parseInt(question.point_value);
-
-  
-  // increment the number correct or incorrect, depending upon if the answer was true or false.
-
-  if (answeredCorrectly) {
-    console.log(`Correct Answer - updating totals in state.  Point Total = ${pointTotal}`)
-
-    this.setState({
-      numberCorrect: correct+=1,
-      totalQuestions: total+=1,
-      pointsEarned: pointTotal
-    })
-    console.log(`updating Game state point total = ${this.state.pointsEarned} by ${pointTotal} points`);
-    
-  } else {
-      this.setState({
-        totalQuestions: total+=1,
-        numberWrong: wrong+=1,
-        pointsEarned: this.state.pointsEarned
-      })
-  }
-  
- 
-}
 
 
 /**
  * Return next question from the collection stored in state.
  */
-getNextQuestion = () => {
-  console.log("Fetching next question from the collection");
-  let tempArray = this.state.initialQuestions;
-  if (tempArray.length > 0) {
-    this.setState({
-      currentQuestion: tempArray.pop()
-  })
-  console.log('Question from the stack = ', this.state.currentQuestion)
-  } else {
-    console.log("no more questions")
-    
-  }
-  
-  if (tempArray.length === 0) {
-    this.setState({
-      lastQuestion: true,
-      toggleShowNextQuestion: false
-    })
-  }
-}
+
 
 /**
  * finish game
@@ -200,14 +132,18 @@ getNextQuestion = () => {
 
   render() {
   return (
+
+    <QuestionProvider>
+      <GameStatusProvider>
     <div className="App">
      <div className="container">
      
       <Header />
       <br/>
 
-      
-
+      <GameBoard/>
+      {/* <GameStatus /> */}
+{/* 
       <Main 
         userList={this.state.initialUsers}
         questionList={this.state.initialQuestions}
@@ -221,11 +157,13 @@ getNextQuestion = () => {
         lastQuestion={this.state.lastQuestion}
         finishGame={this.finishGame}
         toggleShowNextQuestion={this.state.toggleShowNextQuestion}
-      />    
+      />     */}
      
-     <Footer />
+     
      </div>
     </div>
+    </GameStatusProvider>
+    </QuestionProvider>
   );
 }
 }
