@@ -7,6 +7,7 @@
  import GameQuestion from './GameQuestion';
  import GameStatus from './GameStatus';
  import ProgressTracker from './ProgressTracker';
+ import GameOver from './GameOver';
 
 
 
@@ -124,13 +125,19 @@ const getNextQuestion = () => {
        
        
     }
+
+
          return (
              <>
-             {/* Main is where the each game question renders.
-                When we are out of questions, a button appears to end the game gracefully */}
+             {/* There's a better way to do this.  Basically, want to display a default screen when user ends the game.
+                  ELSE, display the regular game board. */}
 
+        { finishGame ?
+           <main> <GameOver /> </main>
+            :
             <main>
-
+                    {/* Main is where the each game question renders.
+                        When we are out of questions, a button appears to end the game gracefully */}
                 {!lastQuestion ?
                         <div className="game-question">
                                 
@@ -151,12 +158,12 @@ const getNextQuestion = () => {
                         </Button>
                     </div>
                 
-                }
+                } 
                        
             </main>
-
-{/* Aside is where the status of the current game is displayed
-    This is updated after each question is answered by the player */}
+        }
+                {/* Aside is where the status of the current game is displayed
+                    This is updated after each question is answered by the player */}
 
                 <aside>
                 <div className="game_status">
@@ -177,12 +184,6 @@ const getNextQuestion = () => {
                 
                 <nav>
                 <div className="progress_bar">
-                   
-                   {/* <ProgressBar
-                    now={pointsEarned}
-                    max={24}
-                    label={pointsEarned}
-                    /> */}
                     <ProgressTracker 
                         pointsEarned={pointsEarned}
                     />
@@ -190,20 +191,18 @@ const getNextQuestion = () => {
                 </div>
                 </nav>
                
-               {finishGame ? 
-               <div className="finish-game">
-                   <main>Thanks for Playing!</main>
-               </div> :
+               
             
                 <footer>
                 <div className="end-game">
                     <Button variant="primary" size="lg" type="submit" value="end_game" onClick={() => endGame(numberCorrect, numberWrong)} block>Stop Playing</Button>
                 </div>
                 </footer>
-            }
-           
+            )
+        }
              </>
-         )
+        )
+         
         
  }
 

@@ -22,7 +22,7 @@ function ProgressTracker(props) {
                 />
             </div>
            
-            { pointsEarned == 30 ? 
+            { pointsEarned === 30 ? 
             <div className="congrats-message"> Congrats on earning extra time! Sending an email to your parents now!</div> :
             ""}
             
