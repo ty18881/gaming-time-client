@@ -17,12 +17,20 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
         return (
 
             <>
-                <h2>Question # {question.id}</h2>
-                <h3> {question.operand1} {question.operator} {question.operand2} = </h3>
-                <input 
-                    type="text" placeholder="" value={userInput} onChange={(e) => setUserInput(e.target.value)}
-                />
-                <div> 
+                <div className='current-question'>
+                    <h2>Question # {question.id}</h2>
+                    <h3> {question.operand1} {question.operator} {question.operand2} = 
+                    <input 
+                        type="text" 
+                        placeholder="" 
+                        value={userInput} 
+                        onChange={(e) => setUserInput(e.target.value)}
+                        size='3'
+                    />
+                    </h3>
+                </div>
+
+                <div className="next-question">
                     <Button 
                         variant="primary"
                         size="sm"
@@ -33,14 +41,13 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
                     >
                         Check Your Answer!
                     </Button>
-                </div>
-                <div className="nextquestion">
+                
                             <Button variant="primary" 
                                 size="sm" 
-                                className="next_question" 
+                                className="next_question-btn" 
                                 value="next_question" 
                                 onClick={() => {getNextQuestion(); setRepeatAnswerDisabled(false)}}>
-                                    Get Next Question
+                                    Next Question
                             </Button>
                             
                 </div>

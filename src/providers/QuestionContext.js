@@ -52,7 +52,10 @@ export const QuestionProvider = (props) => {
         { id: 9, operator: 'x', operand1: 4, operand2: 9, answer: 36 , point_value: 2},
         { id: 10, operator: 'x', operand1: 4, operand2: 10, answer: 40 , point_value: 2},
         { id: 11, operator: 'x', operand1: 4, operand2: 11, answer: 44 , point_value: 2},
-        { id: 12, operator: 'x', operand1: 4, operand2: 12, answer: 48 , point_value: 2}
+        { id: 12, operator: 'x', operand1: 4, operand2: 12, answer: 48 , point_value: 2},
+        { id: 13, operator: 'x', operand1: 4, operand2: 13, answer: 52 , point_value: 2},
+        { id: 14, operator: 'x', operand1: 4, operand2: 14, answer: 56 , point_value: 2},
+        { id: 15, operator: 'x', operand1: 4, operand2: 15, answer: 60 , point_value: 2}
     ])
 
     const [answerCorrect, setAnswerCorrect] = useState(false);

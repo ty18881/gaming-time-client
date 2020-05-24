@@ -15,9 +15,6 @@ import React, { Component, useState } from 'react';
            
             <div className="game_status">
                 <div className="total"> 
-                   <h1>
-                        Total Questions: {totalQuestions}  
-                    </h1> 
                 </div>
                 <div className="num-correct">
                         <h1>Correct: {numberCorrect}</h1>

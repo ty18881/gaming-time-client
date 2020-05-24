@@ -3,16 +3,21 @@
  * 
  */
 
- import React, { Component, useState, useContext, useEffect } from 'react';
+ import React, { useContext, useEffect } from 'react';
  import GameQuestion from './GameQuestion';
  import GameStatus from './GameStatus';
- import ProgressBar from './ProgressBar';
+ import ProgressTracker from './ProgressTracker';
+
+
 
  
  import {QuestionContext} from '../providers/QuestionContext';
  import {GameStatusContext} from '../providers/GameStatusContext';
+ import {UserContext} from '../providers/UserContext';
 
  import Button from 'react-bootstrap/Button';
+//  import ProgressBar from 'react-bootstrap/ProgressBar';
+
 
  const  GameBoard = (props) => {
 
@@ -34,8 +39,11 @@
     const {answerCorrect} = useContext(GameStatusContext);
     const {setAnswerCorrect} = useContext(GameStatusContext);
 
-    
+    const {finishGame} = useContext(GameStatusContext);
+    const {resetGame} = useContext(GameStatusContext);
 
+    
+    const {currentUser} = useContext(UserContext);
 
 
 const getNextQuestion = () => {
@@ -55,14 +63,15 @@ const getNextQuestion = () => {
         let timeEarned = Math.round(pointsEarned / 15 ) * 15;
         let finishDate = new Date().toDateString();
 
+        
         // format the date so our DB doesn't choke.
 
         // this object holds both the game and progress report elements so we hit the DB one time.
         let progressReport = {date: finishDate, time_earned: timeEarned, user_id: 1, num_correct: numberCorrect, num_wrong: numberWrong}
         console.log(`Progress Report = ${progressReport}`)
         saveProgressReport(progressReport);
-
-
+        resetGame();
+        
     }
 
     // I actually want this to happen in the game status context instead but we'll get there.
@@ -169,19 +178,30 @@ const getNextQuestion = () => {
                 <nav>
                 <div className="progress_bar">
                    
-                    <ProgressBar 
+                   {/* <ProgressBar
+                    now={pointsEarned}
+                    max={24}
+                    label={pointsEarned}
+                    /> */}
+                    <ProgressTracker 
                         pointsEarned={pointsEarned}
                     />
                     
                 </div>
                 </nav>
                
-
-            <footer>
-             <div className="end_game">
-                 <Button variant="primary" size="lg" type="submit" value="end_game" onClick={() => endGame(numberCorrect, numberWrong)} block>Stop Playing</Button>
-             </div>
-             </footer>
+               {finishGame ? 
+               <div className="finish-game">
+                   <main>Thanks for Playing!</main>
+               </div> :
+            
+                <footer>
+                <div className="end-game">
+                    <Button variant="primary" size="lg" type="submit" value="end_game" onClick={() => endGame(numberCorrect, numberWrong)} block>Stop Playing</Button>
+                </div>
+                </footer>
+            }
+           
              </>
          )
         

@@ -40,16 +40,17 @@
        findUser(userName);
       
         // the values here determine the conditional rendering that happens next.
-        if (currentUser === userName) {
-            console.log("Welcome this user back to the game.");
+        if (currentUser.name === userName) {
+            console.log(`Welcome this user back to the game. ${userName}`);
             setFoundUser(true);
+
         } else {
           
             console.log("Adding you to our database");
 
             // this call sets currentUser in state as well.
             addNewUser(userName, age, parentName, parentEmail);
-            console.log('did we recognize you as current user?  Is this the name you typed?', currentUser);
+            console.log('did we recognize you as current user?  Is this the name you typed?', currentUser.name);
         }
       
       };

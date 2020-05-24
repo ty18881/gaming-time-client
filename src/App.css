@@ -12,6 +12,9 @@ h1 {
   text-align: center;
 }
 
+.App {
+  background-color: #1f3157;
+}
 .container {
   display: grid;
 
@@ -31,7 +34,7 @@ h1 {
   background-repeat: repeat;
   background-size: contain;
   background-blend-mode: lighten;
-  /* background-color: bisque; */
+  
   color: white;
   font-weight: bolder;
   align-content: space-evenly;
@@ -46,6 +49,7 @@ header {
 nav {
   grid-area: nav;
   margin-left: 0.5rem;
+  background-color: rgba(0, 0, 0, 1) transparent;
   
   /* background-color: var(--plum); */
 }
@@ -59,7 +63,7 @@ main {
 aside {
   grid-area: aside;
   margin-right: 0.5rem;
-  
+  background-color: black transparent;
   /* background-color: var(--plum); */
 }
 
@@ -68,9 +72,12 @@ footer {
   background-color: var(--oasis-blue);
 }
 
-.nextquestion {
+.next-question {
   display: flex;
   flex-direction: row-reverse;
+  place-self: center;
+  margin: 5px;
+  padding: 1px;
 }
 
 .check_answer {
@@ -79,13 +86,19 @@ footer {
 }
 
 .num-correct {
-  color: green;
-  font-weight: bolder;
+  /* color: green; */
+  font-weight: 900;
+  background-color: green;
 }
 
 .num-wrong {
-  color: red;
+  /* color: red; */
   font-weight: bolder;
+  background-color: red;
+}
+
+.congrats-message {
+  background-color: green;
 }
 
 form {

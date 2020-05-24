@@ -77,13 +77,13 @@ handleAddParentEmail = (event) => {
 
                 <GameBoard/>    
               
-              <Footer />
-
+              {/* <Footer /> */}
+{/* 
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/about" component={About} />
                 <Route path="/welcome" component={Welcome} />
-              </Switch>
+              </Switch> */}
 
               </div>
           </div>

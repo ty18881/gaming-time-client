@@ -45,14 +45,15 @@ export const UserContextProvider =(props) => {
     console.log('User Names', userNames);
 
     const saveNewUser = async (username, age, parentName, parentEmail) => {
-        console.log('hit the put route to save the new user and corresponding parent info');
+
+        console.log(`Saving new user: ${username}, ${age}, ${parentName}, ${parentEmail}`);
         fetch(`${URL}`, {
             method: 'POST',
             body: JSON.stringify({
                 name: username,
                 age: age,
                 parentName: parentName,
-                email: parentEmail
+                parentEmail: parentEmail
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -83,9 +84,12 @@ export const UserContextProvider =(props) => {
     //review userNames collection and find this user. 
     // we'll need to set this object in state so if the attempt to save data, we have their id.
     const findUser = (userName) => {
-        console.log('hit the function. Congrats.')
+        console.log('hit the function. Congrats.', userName)
         
-        setCurrentUser(userNames.find(element => element.name === userName.name));
+        console.log(userNames.find(element => element.name === userName))
+// this line here doesn't seem to be working as expected.  Current user remains the default, an empty object.
+        setCurrentUser(userNames.find(element => element.name === userName));
+        console.log(`Found the user ${currentUser.name}`);
 
     }
 
