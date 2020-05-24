@@ -5,13 +5,10 @@
  * Explains the game rules
  */
 
- import React, { useState, useEffect, useContext } from 'react';
+ import React, { useState, useContext } from 'react';
  import {UserContext} from '../providers/UserContext';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
+ import Button from 'react-bootstrap/Button';
 
  function Welcome() {
 
@@ -24,35 +21,35 @@ import Col from 'react-bootstrap/Col';
     const [parentEmail, setParentEmail] = useState('');
     const [parentName, setParentName] = useState('');
 
-    
-
     const [foundUser, setFoundUser] = useState(false);
 
-    // use Context to get the username list.
-    const {userNames} = useContext(UserContext);
-
-    // userNames, setUserNames, newUser, addNewUser, currentUser, findUser
     const {findUser} = useContext(UserContext);
 
     const {currentUser} = useContext(UserContext);
 
+    const {addNewUser} = useContext(UserContext);
+
       
     
       const handleSubmit = (event) => {
-        console.log('do we recognize this user?');
-        event.preventDefault();
-      
        
+        event.preventDefault();
+        console.log('do we recognize this user?');
+        // search the collection in state for the user name submitted in the form.
+        // this method sets current user in state in UserContext.
+       findUser(userName);
       
         // the values here determine the conditional rendering that happens next.
-        if (currentUser != null) {
+        if (currentUser === userName) {
             console.log("Welcome this user back to the game.");
             setFoundUser(true);
         } else {
-          // the user is new to us.
-          // display the rules
-          // display a button asking if they want to play.
-            console.log("display the rules")
+          
+            console.log("Adding you to our database");
+
+            // this call sets currentUser in state as well.
+            addNewUser(userName, age, parentName, parentEmail);
+            console.log('did we recognize you as current user?  Is this the name you typed?', currentUser);
         }
       
       };
@@ -63,7 +60,7 @@ import Col from 'react-bootstrap/Col';
     if not, go ahead and add them and store the corresponding user object in state.
     else,  store the corresponding user object in state. */}
             
-                <h2>GAME WELCOME PAGE</h2>
+               
                 {/* I'm going to have to style this div and position it properly on the screen.
                     I want it to appear below the 'Nav' links above and across one line. */}
             <form onSubmit={handleSubmit}>
@@ -75,8 +72,36 @@ import Col from 'react-bootstrap/Col';
                         placeholder="what's your username?"
                         onChange={(e) => setUserName(e.target.value)}
                     />
-
-                    
+                    <label htmlFor="age"/>
+                    <input
+                        type="text"
+                        id="age"
+                        name="age"
+                        placeholder="how old are you"
+                        onChange={(e) => setAge(e.target.value)}
+                    />
+                    <label htmlFor="parentName"/>
+                    <input
+                        type="text"
+                        id="parentName"
+                        name="parentName"
+                        placeholder="what's your Adult's Name?"
+                        onChange={(e) => setParentName(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        id="parentEmail"
+                        name="parentEmail"
+                        placeholder="what's their email address?"
+                        onChange={(e) => setParentEmail(e.target.value)}
+                    />
+                    <Button variant="primary" 
+                                size="sm" 
+                                className="save-user" 
+                                value="save-user" 
+                                type="submit">
+                                    Submit
+                            </Button>
             </form>     
            
             </>

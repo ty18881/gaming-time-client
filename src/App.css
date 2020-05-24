@@ -77,6 +77,17 @@ footer {
   display: inline-flex;
   /* flex-direction: initial; */
 }
+
+.num-correct {
+  color: green;
+  font-weight: bolder;
+}
+
+.num-wrong {
+  color: red;
+  font-weight: bolder;
+}
+
 form {
   display: grid;
   grid-template-columns: [labels] auto [controls] 1fr;

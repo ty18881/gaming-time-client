@@ -19,10 +19,10 @@ import React, { Component, useState } from 'react';
                         Total Questions: {totalQuestions}  
                     </h1> 
                 </div>
-                <div className="num_correct">
+                <div className="num-correct">
                         <h1>Correct: {numberCorrect}</h1>
                 </div>
-                <div className="num_wrong">
+                <div className="num-wrong">
                         <h1>Incorrect: {numberWrong}</h1>
                 </div>
                     

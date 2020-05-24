@@ -46,7 +46,7 @@ export const UserContextProvider =(props) => {
 
     const saveNewUser = async (username, age, parentName, parentEmail) => {
         console.log('hit the put route to save the new user and corresponding parent info');
-        fetch(`$URL`, {
+        fetch(`${URL}`, {
             method: 'POST',
             body: JSON.stringify({
                 name: username,
@@ -61,20 +61,23 @@ export const UserContextProvider =(props) => {
         .then(res => res.json())
         .then(resJson => {
             console.log('User Saved to the DB')
-            setNewUser(resJson);
+            
+            setUserNames([...userNames, resJson]);
             setCurrentUser(resJson);
+            console.log(resJson)
         })
         .catch(error => console.error({Error: error}));
     };
 
     const addNewUser = (username, age, parentName, parentEmail) => {
 
+        console.log(`Saving new player ${username} to our database`);
         // user to our database, add corresponding parent record to our database.
 
         // once the DB portions are complete, need to save the new user to our collection in state
         saveNewUser(username, age, parentName, parentEmail);
         // add the new user to state.
-        setUserNames([...userNames, currentUser]);
+        // setUserNames([...userNames, currentUser]);
     }
 
     //review userNames collection and find this user. 
