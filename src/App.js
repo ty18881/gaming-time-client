@@ -6,7 +6,6 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Header from './components/Header';
-import Footer from './components/Header';
 import Welcome from './components/Welcome';
 import About from './components/About';
 
@@ -32,19 +31,13 @@ class App extends Component {
               <div className="container">
               
                 <Header />
-                <br/>
-
-              
-              
-              {/* <Footer /> */}
 
               <Switch>
                 <Route path="/" exact component={GameBoard} />
                 <Route path="/about" exact component={About} />
                 <Route path="/welcome" component={Welcome} />
               </Switch>
-
-              <GameBoard/>   
+  
               </div>
           </div>
           </GameStatusProvider>
@@ -55,12 +48,5 @@ class App extends Component {
 }
 }
 
-const Home = () => {
-  return (
-<div>
-    
-  </div>
-  )
-  
-}
+
 export default App;

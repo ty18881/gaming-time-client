@@ -6,6 +6,7 @@
   --orange: rgba(263, 97, 10, 1);
   --shady-sand: rgba(186, 168, 152, 1);
   --plum: rgba(164, 10, 60, 1);
+  --bootstrap-primary: rgba(2, 117, 216, 1);
 }
 
 h1 {
@@ -42,8 +43,8 @@ h1 {
 
 header {
   grid-area: header;
- 
-  /* background-color: var(--plum); */
+  text-align: center;
+  background-color: var(--bootstrap-primary);
 }
 
 nav {
@@ -52,6 +53,19 @@ nav {
   background-color: rgba(0, 0, 0, 1) transparent;
   
   /* background-color: var(--plum); */
+}
+
+.nav-links {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  font-weight: normal;
+}
+
+.route-link {
+  color: white;
 }
 
 main {
@@ -109,6 +123,7 @@ header > ul > li {
 .congrats-message {
   background-color: green;
 }
+
 
 form {
   display: grid;

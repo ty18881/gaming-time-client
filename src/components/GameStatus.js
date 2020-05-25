@@ -16,10 +16,10 @@ import React from 'react';
             <div className="game_status">
                 <div className="total"> 
                 </div>
-                <div className="num-correct">
+                <div className="num-correct rounded-lg">
                         <h1>Correct: {numberCorrect}</h1>
                 </div>
-                <div className="num-wrong">
+                <div className="num-wrong rounded-lg">
                         <h1>Incorrect: {numberWrong}</h1>
                 </div>
                     

@@ -12,8 +12,9 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
 
 
         const [userInput, setUserInput] = useState('');
-        const [repeatAnswerDisabled, setRepeatAnswerDisabled] = useState(false);
+ 
 
+        const {setRepeatAnswerDisabled} = useState(false);
         // handleKey up used by the GameQuestion to detect when user presses enter instead of clicking a button.
 
         const handleKeyUp = (event, question, userInput) => {
@@ -46,16 +47,6 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
                 </div>
 
                 <div className="next-question">
-                    {/* <Button 
-                        variant="primary"
-                        size="sm"
-                        type="input"
-                        value="check-answer"
-                        onClick={() => {checkAnswer(question, userInput); setRepeatAnswerDisabled(true); setUserInput('')}}
-                        disabled={repeatAnswerDisabled}
-                    >
-                        Check Your Answer!
-                    </Button> */}
                 
                             <Button variant="primary" 
                                 size="sm" 

@@ -37,7 +37,7 @@
     const { setNumberWrong} = useContext(GameStatusContext);
     const {pointsEarned} = useContext(GameStatusContext);
     const {setPointsEarned} = useContext(GameStatusContext);
-    const {answerCorrect} = useContext(GameStatusContext);
+    
     const {setAnswerCorrect} = useContext(GameStatusContext);
 
     const {finishGame} = useContext(GameStatusContext);

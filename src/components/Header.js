@@ -8,22 +8,23 @@ class Header extends Component {
 
         return (
             <>
-            <header>
+            <header className="rounded-lg">
+            <h2>
+                Math Practice for Gaming Time?  What Parent Would Say No?
+            </h2>
                 <ul className="nav-links">
                     
-                    <Link to='/'>
-                    <li>Play!</li>
+                    <Link to='/' className='route-link'>
+                    <li>Play</li>
                     </Link>
-                    <Link to='/about'>
+                    <Link to='/about' className='route-link'>
                     <li>About</li>
                     </Link>
-                    <Link to='/welcome'>
+                    <Link to='/welcome' className='route-link'>
                     <li>Welcome</li>
                     </Link>
                 </ul>
-            <h1>
-                Earn Gaming Time!  Just answer a few math questions!
-            </h1>
+           
             </header>
             </>
         )
