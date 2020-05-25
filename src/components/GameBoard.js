@@ -17,7 +17,7 @@
  import {UserContext} from '../providers/UserContext';
 
  import Button from 'react-bootstrap/Button';
-//  import ProgressBar from 'react-bootstrap/ProgressBar';
+
 
 
  const  GameBoard = (props) => {
@@ -201,12 +201,9 @@ const getNextQuestion = () => {
                     <Button variant="primary" size="lg" type="submit" value="end_game" onClick={() => endGame(numberCorrect, numberWrong)} block>Stop Playing</Button>
                 </div>
                 </footer>
+                </>
             )
         }
-             </>
-        )
-         
-        
- }
+ 
 
 export default GameBoard;
