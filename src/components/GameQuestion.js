@@ -14,6 +14,20 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
         const [userInput, setUserInput] = useState('');
         const [repeatAnswerDisabled, setRepeatAnswerDisabled] = useState(false);
 
+        // handleKey up used by the GameQuestion to detect when user presses enter instead of clicking a button.
+
+        const handleKeyUp = (event, question, userInput) => {
+         
+            if (event.keyCode === 13) {
+                console.log('Detected enter key was depressed')
+
+                checkAnswer(question, userInput);
+                setUserInput('');
+
+            }
+
+        }
+
         return (
 
             <>
@@ -25,13 +39,14 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
                         placeholder="" 
                         value={userInput} 
                         onChange={(e) => setUserInput(e.target.value)}
+                        onKeyUp={(e) => { handleKeyUp(e,question, userInput)}}
                         size='3'
                     />
                     </h3>
                 </div>
 
                 <div className="next-question">
-                    <Button 
+                    {/* <Button 
                         variant="primary"
                         size="sm"
                         type="input"
@@ -40,7 +55,7 @@ const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
                         disabled={repeatAnswerDisabled}
                     >
                         Check Your Answer!
-                    </Button>
+                    </Button> */}
                 
                             <Button variant="primary" 
                                 size="sm" 

@@ -30,6 +30,7 @@ TBD
 - useEffect causing interesting loop when loading questions from the database.
 - UserContext not setting currentUser value in state as expected.
 - GameOver method should display player stats for the current session.
+- Automatically render the next question once the user submits their answer
 
 ## Trello Board
 https://trello.com/b/KKdsfhuF/earn-more-time

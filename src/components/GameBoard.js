@@ -3,7 +3,7 @@
  * 
  */
 
- import React, { useContext, useEffect } from 'react';
+ import React, { useContext, useEffect, useState } from 'react';
  import GameQuestion from './GameQuestion';
  import GameStatus from './GameStatus';
  import ProgressTracker from './ProgressTracker';
@@ -46,6 +46,8 @@
     
     const {currentUser} = useContext(UserContext);
 
+    const {setUserInput} = useState();
+   
 
 const getNextQuestion = () => {
     console.log("Fetching next question from the collection");
@@ -123,8 +125,10 @@ const getNextQuestion = () => {
             setTotalQuestions(totalQuestions+1);
         }
        
-       
-    }
+     
+
+ }
+
 
 
          return (
