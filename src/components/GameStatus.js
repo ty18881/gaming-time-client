@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 
 /**
  * this component holds status of the current game
@@ -7,34 +7,27 @@ import React, { Component, useState } from 'react';
  * Number Incorrect
  */
 
- class GameStatus extends Component {
-
-    render() {
-        const { totalQuestions, numberCorrect, numberWrong } = this.props;
-        
-
+ const GameStatus = ({ totalQuestions, numberCorrect, numberWrong}) => {
+      
         return(
             <>
             
            
             <div className="game_status">
                 <div className="total"> 
-                   <h1>
-                        Total Questions: {totalQuestions}  
-                    </h1> 
                 </div>
-                <div className="num_correct">
-                        <h1>Number Correct: {numberCorrect}</h1>
+                <div className="num-correct rounded-lg">
+                        <h1>Correct: {numberCorrect}</h1>
                 </div>
-                <div className="num_wrong">
-                        <h1>Number Incorrect: {numberWrong}</h1>
+                <div className="num-wrong rounded-lg">
+                        <h1>Incorrect: {numberWrong}</h1>
                 </div>
                     
             </div>
            
             </>
         )
-    }
+
  }
 
  export default GameStatus;

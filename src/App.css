@@ -6,12 +6,16 @@
   --orange: rgba(263, 97, 10, 1);
   --shady-sand: rgba(186, 168, 152, 1);
   --plum: rgba(164, 10, 60, 1);
+  --bootstrap-primary: rgba(2, 117, 216, 1);
 }
 
 h1 {
   text-align: center;
 }
 
+.App {
+  background-color: #1f3157;
+}
 .container {
   display: grid;
 
@@ -31,7 +35,7 @@ h1 {
   background-repeat: repeat;
   background-size: contain;
   background-blend-mode: lighten;
-  /* background-color: bisque; */
+  
   color: white;
   font-weight: bolder;
   align-content: space-evenly;
@@ -39,15 +43,29 @@ h1 {
 
 header {
   grid-area: header;
- 
-  /* background-color: var(--plum); */
+  text-align: center;
+  background-color: var(--bootstrap-primary);
 }
 
 nav {
   grid-area: nav;
   margin-left: 0.5rem;
+  background-color: rgba(0, 0, 0, 1) transparent;
   
   /* background-color: var(--plum); */
+}
+
+.nav-links {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  font-weight: normal;
+}
+
+.route-link {
+  color: white;
 }
 
 main {
@@ -59,7 +77,7 @@ main {
 aside {
   grid-area: aside;
   margin-right: 0.5rem;
-  
+  background-color: black transparent;
   /* background-color: var(--plum); */
 }
 
@@ -68,15 +86,45 @@ footer {
   background-color: var(--oasis-blue);
 }
 
-.nextquestion {
+header > ul {
+  list-style: none;
+  color: white;
+}
+
+header > ul > li {
+  color: white;
+}
+
+.next-question {
   display: flex;
   flex-direction: row-reverse;
+  place-self: center;
+  margin: 5px;
+  padding: 1px;
 }
 
 .check_answer {
   display: inline-flex;
   /* flex-direction: initial; */
 }
+
+.num-correct {
+  /* color: green; */
+  font-weight: 900;
+  background-color: green;
+}
+
+.num-wrong {
+  /* color: red; */
+  font-weight: bolder;
+  background-color: red;
+}
+
+.congrats-message {
+  background-color: green;
+}
+
+
 form {
   display: grid;
   grid-template-columns: [labels] auto [controls] 1fr;

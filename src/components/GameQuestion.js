@@ -3,37 +3,65 @@
  * on the user's screen.
  */
 
- import React, { Component, useState } from 'react';
+ import React, { useState } from 'react';
+
 
 import Button from 'react-bootstrap/Button';
+    
+const GameQuestion = ({checkAnswer, question, getNextQuestion}) => {
 
- function GameQuestion(props) {
 
-    const { question, handleGameState, checkAnswer, answerCorrect, keyPressed } = props;
+        const [userInput, setUserInput] = useState('');
+ 
 
-    const [userInput, setUserInput ] = useState();
-
+        const [repeatAnswerDisabled, setRepeatAnswerDisabled] = useState(false);
         
-        return (
-            <>
-            <h1> Question # {question.id}</h1>
-            <h2> {question.operand1} {question.operator} {question.operand2} = 
-            
-                <input
-                type="text" placeholder=""
-                onChange={e => setUserInput(e.target.value)}
-                onKeyUp={e => keyPressed(e, userInput, question)}
-                />
-               
-            </h2>
-            <div className="check_answer"><Button variant="primary" size="sm" type="input" value="check_answer" onClick={() => {checkAnswer(userInput, question)}}>Check Your Answer!</Button></div>
+        // handleKey up used by the GameQuestion to detect when user presses enter instead of clicking a button.
 
-            {answerCorrect ?
-                <div>Congrats!</div> :
-                ""}
+        const handleKeyUp = (event, question, userInput) => {
+         
+            if (event.keyCode === 13) {
+                console.log('Detected enter key was depressed')
+
+                checkAnswer(question, userInput);
+                setUserInput('');
+
+            }
+
+        }
+
+        return (
+
+            <>
+                <div className='current-question'>
+                    <h2>Question # {question.id}</h2>
+                    <h3> {question.operand1} {question.operator} {question.operand2} = 
+                    <input 
+                        type="text" 
+                        placeholder="" 
+                        value={userInput} 
+                        onChange={(e) => setUserInput(e.target.value)}
+                        onKeyUp={(e) => { handleKeyUp(e,question, userInput)}}
+                        size='3'
+                    />
+                    </h3>
+                </div>
+
+                <div className="next-question">
+                
+                            <Button variant="primary" 
+                                size="sm" 
+                                className="next_question-btn" 
+                                value="next_question" 
+                                onClick={() => {getNextQuestion(); setRepeatAnswerDisabled(false)}}>
+                                    Next Question
+                            </Button>
+                            
+                </div>
             </>
+           
         )
-  
+   
  }
 
  export default GameQuestion;
