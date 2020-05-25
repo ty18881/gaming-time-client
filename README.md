@@ -7,7 +7,11 @@ The primary user is a kid who is subject to parental controls or other limits on
 This application allows them to earn more time by answering questions and fires off an email to their parent
 when specific thresholds are reached.
 
-## My "Teach yourself something new" project elements are React Hooks, Context API and React Router
+## My "Teach yourself something new" project elements 
+- React Hooks
+- Context API
+- React Router
+- ActionMailer
 
 ## This project utilizes the following technologies under the hood:
 - React
