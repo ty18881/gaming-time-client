@@ -195,7 +195,6 @@ const getNextQuestion = () => {
                 </div>
                 </nav>
                
-               
             
                 <footer>
                 <div className="end-game">

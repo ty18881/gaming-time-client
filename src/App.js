@@ -6,6 +6,9 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Header from './components/Header';
+import Footer from './components/Header';
+import Welcome from './components/Welcome';
+import About from './components/About';
 
 
 import {QuestionProvider} from './providers/QuestionContext';
@@ -31,16 +34,17 @@ class App extends Component {
                 <Header />
                 <br/>
 
-                <GameBoard/>    
+              
               
               {/* <Footer /> */}
-{/* 
-              <Switch>
-                <Route path="/" exact component={Home} />
-                <Route path="/about" component={About} />
-                <Route path="/welcome" component={Welcome} />
-              </Switch> */}
 
+              <Switch>
+                <Route path="/" exact component={GameBoard} />
+                <Route path="/about" exact component={About} />
+                <Route path="/welcome" component={Welcome} />
+              </Switch>
+
+              <GameBoard/>   
               </div>
           </div>
           </GameStatusProvider>
@@ -54,7 +58,7 @@ class App extends Component {
 const Home = () => {
   return (
 <div>
-    <h1> Home Page</h1>
+    
   </div>
   )
   

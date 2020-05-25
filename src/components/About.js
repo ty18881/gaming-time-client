@@ -9,7 +9,9 @@ import React from 'react';
       
         return(
             <>
-           <h4>About our Game!</h4>
+           
+            <h4>Answer questions, earn gaming time.  A win, win for you and your folks.  Be sure to click 'Next Question' to get your new challenge!</h4>
+           
             </>
         )
 

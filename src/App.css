@@ -72,6 +72,15 @@ footer {
   background-color: var(--oasis-blue);
 }
 
+header > ul {
+  list-style: none;
+  color: white;
+}
+
+header > ul > li {
+  color: white;
+}
+
 .next-question {
   display: flex;
   flex-direction: row-reverse;

@@ -14,10 +14,10 @@ function Footer(props) {
 
     
         <ul className="nav-links">
-            <Link to='/about' style={navStyle}>
+            <Link to='/about'>
               <li>About</li>
             </Link>
-            <Link to='/welcome' style={navStyle}>
+            <Link to='/welcome'>
               <li>Welcome</li>
             </Link>
           </ul>
