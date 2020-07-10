@@ -23,7 +23,7 @@ when specific thresholds are reached.
 
 
 ## The application URL
-- Client: TBD
+- Client: https://gaming-time-client.herokuapp.com/
 - API: https://gaming-time-api.herokuapp.com
 
 ## Future Refinements
